@@ -38,9 +38,9 @@ def magnet2torrent(link):
     handle = lt.add_magnet_uri(sess, link, params)
 
     # waiting for metadata
-    for i in xrange(1,2):
+    for i in xrange(1,10):
         if (not handle.has_metadata()):
-            time.sleep(1)
+            time.sleep(6)
         else:
             break
 
