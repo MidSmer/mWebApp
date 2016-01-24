@@ -6,10 +6,9 @@ from torrentTool import change
 def get_torrent():
 	result = change.magnet2torrent(request.form['magnet'])
 	if 200 != result['status']:
-		res = make_response(result['message'], 200)
-		# res.headers['Content-Length'] = len(result['message'])
-		res.headers['Content-Type'] = 'application/octet-stream'
-		res.headers['Content-Disposition'] = 'attachment; filename=' + 'a.toorent'
-		return res
+		return result['message']
 
-	return result['data']
+	res = make_response(result['data'], 200)
+	res.headers['Content-Type'] = 'application/octet-stream'
+	res.headers['Content-Disposition'] = 'attachment; filename=' + 'a.toorent'
+	return res
