@@ -10,5 +10,5 @@ def get_torrent():
 
 	res = make_response(result['data'], 200)
 	res.headers['Content-Type'] = 'application/octet-stream'
-	res.headers['Content-Disposition'] = 'attachment; filename=' + 'a.toorent'
+	res.headers['Content-Disposition'] = 'attachment; filename=' + 'a.torrent'
 	return res
