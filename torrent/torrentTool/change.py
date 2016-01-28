@@ -50,5 +50,7 @@ def magnet2torrent(link):
     torinfo = handle.get_torrent_info()
     torfile = lt.create_torrent(torinfo)
     torcontent = lt.bencode(torfile.generate())
+    torname = torinfo.name()
+    sess.remove_torrent(handle, sess.delete_files)
 
-    return {'status':200, 'name':torinfo.name(), 'data':torcontent}
+    return {'status':200, 'name':torname, 'data':torcontent}
