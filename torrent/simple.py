@@ -8,4 +8,4 @@ def get_torrent():
 	if 200 != result['status']:
 		return result['message']
 
-	return Response(result['data'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name']})
+	return Response(result['data'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name'] + '.torrent'})
