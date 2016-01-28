@@ -1,4 +1,4 @@
-from flask import request,make_response
+from flask import request, Response
 from torrent import app
 from torrentTool import change
 
@@ -8,7 +8,4 @@ def get_torrent():
 	if 200 != result['status']:
 		return result['message']
 
-	res = make_response(result['data'], 200)
-	res.headers['Content-Type'] = 'application/octet-stream'
-	res.headers['Content-Disposition'] = 'attachment; filename=' + 'a.torrent'
-	return res
+	return Response(result['data'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name']})

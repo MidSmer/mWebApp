@@ -30,7 +30,7 @@ def magnet2torrent(link):
 
     params = {
         "save_path": '/tmp/tor',
-        #"storage_mode":lt.storage_mode_t.storage_mode_sparse,
+        # "storage_mode":lt.storage_mode_t.storage_mode_sparse,
         #"paused": True,
         #"auto_managed": True,
         "duplicate_is_error": True
@@ -51,4 +51,4 @@ def magnet2torrent(link):
     torfile = lt.create_torrent(torinfo)
     torcontent = lt.bencode(torfile.generate())
 
-    return {'status':200, 'data':torcontent}
+    return {'status':200, 'name':torinfo.name(), 'data':torcontent}
