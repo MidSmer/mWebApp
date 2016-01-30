@@ -38,14 +38,16 @@ def magnet2torrent(link):
     handle = lt.add_magnet_uri(sess, link, params)
 
     # waiting for metadata
-    while (not handle.has_metadata()):
-        try:
+    for x in xrange(1,20):
+        if (not handle.has_metadata()):
             time.sleep(6)
-        except KeyboardInterrupt:
-            sess.pause()
-            return {'status':404, 'message':u'没有取到种子'}
+        else:
+            break
 
     sess.pause()
+    if (not handle.has_metadata()):
+        return {'status':404, 'message':u'没有取到种子'}
+
     # create a torrent
     torinfo = handle.get_torrent_info()
     torfile = lt.create_torrent(torinfo)
