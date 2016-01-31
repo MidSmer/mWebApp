@@ -1,4 +1,4 @@
-from flask import request, Response, render_template
+from flask import request, Response, render_template, send_from_directory
 from torrent import app
 from torrentTool import change
 from .decorator import login_required
@@ -14,3 +14,8 @@ def get_torrent():
             return result['message']
 
         return Response(result['data'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name'] + '.torrent'})
+
+@app.route('/download/<path:filePath>')
+def get_file(filePath):
+    rootPath = '/mdata/data'
+    return send_from_directory(rootPath, filePath, as_attachment=True)
