@@ -16,6 +16,7 @@ def get_torrent():
         return Response(result['data'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name'] + '.torrent'})
 
 @app.route('/download/<path:filePath>')
+@login_required
 def get_file(filePath):
     rootPath = '/mdata/data'
     return send_from_directory(rootPath, filePath, as_attachment=True)
