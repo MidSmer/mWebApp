@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import request, Response, render_template, send_from_directory
 from torrent import app
 from torrentTool import change
@@ -24,7 +26,7 @@ def get_torrent():
             if result['status'] != 200:
                 return 'get fail'
             else:
-                return Response(result['torrent'], headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name'] + '.torrent'})
+                return Response(str(result['torrent']), headers={'Content-Type':'application/octet-stream','Content-Disposition':'filename=' + result['name'] + '.torrent'})
 
 @app.route('/download/<path:filePath>')
 @login_required

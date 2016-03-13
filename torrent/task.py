@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from torrent import celery
 from db import sqlite
 from torrentTool import change
@@ -9,5 +11,5 @@ def torrent_task(id):
     if data is not None:
         result = change.magnet2torrent(data['magnet'])
         if 200 == result['status']:
-            db.execute('update torrent set status = 200, name = ? , torrent = ? where id = ?', (result['name'], result['data'], id))
+            db.execute('update torrent set status = 200, name = ? , torrent = ? where id = ?', (unicode(result['name']), buffer(result['data']), id))
             db.commit()
