@@ -4,7 +4,7 @@ from flask import request, Response, json, send_from_directory, session, make_re
 from torrent import app
 from .decorator import login_required
 from db import sqlite
-# from task import torrent_task
+from task import torrent_task
 import os
 
 @app.route('/cgi-bin/get-user')
@@ -113,7 +113,7 @@ def add_torrent():
         cur = db.execute('insert into torrent (status, magnet) values (0, ?)', (magnet,))
         db.execute('insert into join_user_torrent (user_id, torrent_id) values (?, ?)', (session['userId'], cur.lastrowid))
         db.commit()
-        # torrent_task.delay(cur.lastrowid)
+        torrent_task.delay(cur.lastrowid)
         resp = make_response(json.dumps({
             'code': 200,
             'message': u'添加成功',
