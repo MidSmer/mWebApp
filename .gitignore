@@ -1,5 +1,6 @@
 *.pyc
 node_modules
 /ven
+/torrent/data
 /front/typings
 /front/www/app
