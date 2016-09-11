@@ -11,5 +11,5 @@ def torrent_task(id):
     if data is not None:
         result = change.magnet2torrent(data['magnet'])
         if 200 == result['status']:
-            db.execute('update torrent set status = 200, name = ? , torrent = ? where id = ?', (unicode(result['name']), buffer(result['data']), id))
+            db.execute('update torrent set status = 200, name = ? , torrent = ? where id = ?', (unicode(result['name'], 'utf-8'), result['data'], id))
             db.commit()

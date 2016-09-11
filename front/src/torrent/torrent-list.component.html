@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let item of torrents">
+        <td>{{item.name}}</td>
+        <td [ngSwitch]="item.status">
+          <a *ngSwitchCase="'200'" (click)="downTorrent(item)">下载</a>
+          <span *ngSwitchDefault>正在解析</span>
+          <a (click)="delTorrent(item)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,1 +1,5 @@
 *.pyc
+node_modules
+/ven
+/front/typings
+/front/www/app

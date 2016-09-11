@@ -5,7 +5,7 @@ import os
 from torrent import app
 from flask import g
 
-DATABASE = os.path.join(app.root_path, 'db/database.db')
+DATABASE = os.path.join(app.root_path, 'data/sqlite/database.db')
 
 def init_db():
     with app.app_context():
@@ -17,6 +17,8 @@ def init_db():
 def connect_db():
     db = sqlite3.connect(DATABASE)
     db.row_factory = dict_factory
+    db.text_factory = str
+
     return db
 
 def dict_factory(cursor, row):
