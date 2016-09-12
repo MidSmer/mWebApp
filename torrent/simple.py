@@ -134,9 +134,9 @@ def add_torrent():
 def del_torrent(id):
     db = sqlite.get_connection()
 
-    db.execute('delete from join_user_torrent where user_id = ? and id = ?', (session['userId'], id))
     db.execute('delete from torrent where id = (\
         select id from join_user_torrent where user_id = ? and id = ?)', (session['userId'], id))
+    db.execute('delete from join_user_torrent where user_id = ? and id = ?', (session['userId'], id))
     db.commit()
 
     resp = make_response(json.dumps({
@@ -163,9 +163,4 @@ def down_torrent(id):
 @login_required
 def get_file(filePath):
     rootPath = '/mdata/data'
-    return send_from_directory(rootPath, filePath, as_attachment=True)
-
-@app.route('/cgi-bin/resource/<path:filePath>')
-def get_resource(filePath):
-    rootPath = os.path.join(app.root_path, 'resource')
     return send_from_directory(rootPath, filePath, as_attachment=True)
